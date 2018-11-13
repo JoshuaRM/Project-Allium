@@ -14,3 +14,9 @@ class Blockchain:
         # If the file does not already exist, create the file and close it
         if not (os.path.isfile(filename)):
             with open(filename, 'wb') as f: pass
+
+    def get_size_bytes(self, byteString):
+        string = byteString.decode(encoding='UTF-8')
+        length = len(string)
+        return bytes([length])
+
