@@ -33,7 +33,7 @@ class TestBlock(unittest.TestCase):
         #Create int byte of the length of byte string
         testLength = bytes([len(testString)])
         #Check if int byte is equal
-        self.assertEqual(Blockchain.get_size_bytes(self, testString), testLength)
+        self.assertEqual(get_size_bytes(self, testString), testLength)
         
     if __name__ == '__main__':
         unittest.main()

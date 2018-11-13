@@ -15,8 +15,9 @@ class Blockchain:
         if not (os.path.isfile(filename)):
             with open(filename, 'wb') as f: pass
 
-    def get_size_bytes(self, byteString):
-        string = byteString.decode(encoding='UTF-8')
-        length = len(string)
-        return bytes([length])
+    
+def get_size_bytes(self, byteString):
+    string = byteString.decode(encoding='UTF-8')
+    length = len(string)
+    return bytes([length])
 
