@@ -38,12 +38,15 @@ class TestBlock(unittest.TestCase):
         self.assertEqual(get_size_bytes(self, testString), testLength)
         
     def test_add_block(self):
-        target = 10**72     # Target for which all block hashes must be under
-        data = B.hash_SHA("Testing block".encode())   # valid block data to be used for block construction
-        prev_hash = B.hash_SHA("0".encode())
+        target = 10**72     
+        data = B.hash_SHA("Testing block".encode())   
+        prev_hash = B.hash_SHA("0123456789ABCDEF".encode())
         
+        #Create a block using .mine()
         bc = B.mine(prev_hash, data, target)
+        #Get size of block
         size = get_size_bytes(self, bc)
+        # Add block to blockchain
         self.bc.add_block(bc)
         
         
