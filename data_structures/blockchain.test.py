@@ -41,17 +41,11 @@ class TestBlock(unittest.TestCase):
         target = 10**72     # Target for which all block hashes must be under
         data = B.hash_SHA("Testing block".encode())   # valid block data to be used for block construction
         prev_hash = B.hash_SHA("0".encode())
-        prev_hash2 = B.hash_SHA("1".encode())
         
         bc = B.mine(prev_hash, data, target)
-        bc2 = B.mine(prev_hash2, data, target)
         size = get_size_bytes(self, bc)
         self.bc.add_block(bc)
-        self.bc.add_block(bc2)
         
-        
-        payload=read_from_file(self.bc.blockfile)
-        print(bc)
         
     if __name__ == '__main__':
         unittest.main()

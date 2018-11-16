@@ -30,14 +30,4 @@ class Blockchain:
 def get_size_bytes(self, byteString):
     return pack('I', len(byteString))
 
-def read_from_file(filename: str):
-    payload=[]
-    with open(filename, 'rb') as file:
-        while True:
-            char = file.read(1)
-            if not char:
-                break
-            payload.append(char)
-    
-    return payload
 
