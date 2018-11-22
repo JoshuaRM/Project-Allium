@@ -8,26 +8,37 @@ import block as B
     
 class TestBlock(unittest.TestCase):
     def setUp(self):
-        self.bc = Blockchain("testfile")
+        self.bc = Blockchain("testfile", "metadata.json")
         
     def tearDown(self):
         os.remove("testfile")
+        os.remove("metadata.json")
     
     
     def test_constructor(self):
         
         filename = "testfile"
+        metadata = "metadata.json"
         self.assertEqual(self.bc.blockfile, filename)
         self.assertTrue(os.path.isfile(filename))
         # Opens the blockchain file and writes '0' to it
         with open(self.bc.blockfile, 'ab') as fileobj:
             fileobj.write(b'0')
         # Creates another blockchain with the same filename as test_blockchain
-        test_blockchain_2 = Blockchain(self.bc.blockfile)
+        test_blockchain_2 = Blockchain(self.bc.blockfile, metadata)
         # Ensures that the file of test_blockchain is not overwritten
         with open(self.bc.blockfile, 'rb') as fileobj:
             char = fileobj.read(1)
         self.assertEqual(b'0', char)
+        
+        #For testing metadata structure
+        block_indexes = test_blockchain_2.metadata["block_indexes"]
+        block_count = test_blockchain_2.metadata["block_count"]
+        last_block = test_blockchain_2.metadata["last_block"]
+        
+        self.assertEqual(0, block_count)
+        self.assertEqual(b'', last_block)
+        self.assertEqual([], block_indexes)
           
     def test_size(self):
         #Create a byte string to compare to
