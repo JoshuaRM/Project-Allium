@@ -36,9 +36,22 @@ class TestBlock(unittest.TestCase):
         block_count = test_blockchain_2.metadata["block_count"]
         last_block = test_blockchain_2.metadata["last_block"]
         
+        #Test metadata constructor
         self.assertEqual(0, block_count)
         self.assertEqual(b'', last_block)
         self.assertEqual([], block_indexes)
+        
+        #Create variables for block.mine()
+        target = 10**72     
+        data = B.hash_SHA("Testing block".encode())   
+        prev_hash = B.hash_SHA("0123456789ABCDEF".encode())
+        
+        #Create a block object to add
+        block = B.mine(prev_hash, data, target)
+        self.bc.add_block(block)
+        
+        #Test that the added block is added to metadata in last_block
+        self.assertEqual(self.bc.metadata["last_block"], block)
           
     def test_size(self):
         #Create a byte string to compare to
